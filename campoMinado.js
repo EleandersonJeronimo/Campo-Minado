@@ -18,3 +18,24 @@ const createMinefield = (rows, columns) => {
     }
     return minefield;
 };
+
+const placeMines = (minefield, mineCount) => {
+    let rows = minefield.length;
+    let columns = minefield[0].length;
+    let placedMines = 0;
+
+    while (placedMines < mineCount) {
+        let row = Math.floor(Math.random() * rows);
+        let column = Math.floor(Math.random() * columns);
+
+        if (!minefield[row][column].hasMine) {
+            minefield[row][column].hasMine = true;
+            placedMines++;
+            console.log('Mina adicionada com sucesso')
+        }
+        else{
+            console.log('Já existe uma mina nessa posição')
+        }
+    }
+};
+
