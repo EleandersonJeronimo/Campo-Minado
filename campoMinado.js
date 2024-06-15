@@ -6,36 +6,76 @@ const square = {
     nearMines: 0
 };
 
-const createMinefield = (rows, columns) => {
-    let minefield = [];
-    for (let i = 0; i < rows; i++) {
-        let rowArray = [];
-        for (let j = 0; j < columns; j++) {
-            let newSquare = { ...square, row: i, column: j };
-            rowArray.push(newSquare);
+const criarCampo = (linhas, colunas) => {
+    let campo = [];
+    for (let i = 0; i < linhas; i++) {
+        let linhaArray = [];
+        for (let j = 0; j < colunas; j++) {
+            let novoSquare = { ...square, row: i, column: j };
+            linhaArray.push(novoSquare);
         }
-        minefield.push(rowArray);
+        campo.push(linhaArray);
     }
-    return minefield;
+    return campo;
 };
 
-const placeMines = (minefield, mineCount) => {
-    let rows = minefield.length;
-    let columns = minefield[0].length;
-    let placedMines = 0;
+const colocarMinas = (campo, qtdMinas) => {
+    let linhas = campo.length;
+    let colunas = campo[0].length;
+    let minasColocadas = 0;
 
-    while (placedMines < mineCount) {
-        let row = Math.floor(Math.random() * rows);
-        let column = Math.floor(Math.random() * columns);
+    while (minasColocadas < qtdMinas) {
+        let linha = Math.floor(Math.random() * linhas);
+        let coluna = Math.floor(Math.random() * colunas);
 
-        if (!minefield[row][column].hasMine) {
-            minefield[row][column].hasMine = true;
-            placedMines++;
-            console.log('Mina adicionada com sucesso')
+        if (!campo[linha][coluna].hasMine) {
+            campo[linha][coluna].hasMine = true;
+            minasColocadas++;
         }
         else{
-            console.log('Já existe uma mina nessa posição')
         }
     }
 };
+
+const contarMinasVolta = (campo, linha, coluna) => {
+    let linhas = campo.length;
+    let colunas = campo[0].length;
+    let qtdMinas = 0;
+
+    for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+            if (i === 0 && j === 0) continue;
+
+            let novaLinha = linha + i;
+            let novaColuna = coluna + j;
+
+            if (novaLinha >= 0 && novaLinha < linhas && novaColuna >= 0 && novaColuna < colunas) {
+                if (campo[novaLinha][novaColuna].hasMine) {
+                    qtdMinas++;
+                }
+            }
+        }
+    }
+
+    return qtdMinas;
+};
+
+const contarTotMinas = (campo) => {
+    let linha = campo.length;
+    let coluna = campo.length[0];
+    let tot = 0;
+
+    for(let i = 0; i < linha; i++){
+        for(let j = 0; j < coluna; j++)
+            tot += contarMinasVolta(campo, i, j)
+    }
+    return tot;
+}
+
+let teste = criarCampo(5, 5)
+colocarMinas(teste, 10)
+let qtd = contarMinasVolta(teste, 2, 2)
+console.log(qtd)
+let total = contarTotMinas(teste)
+console.log(total)
 
