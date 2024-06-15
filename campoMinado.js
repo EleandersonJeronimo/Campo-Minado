@@ -11,7 +11,7 @@ const createMinefield = (rows, columns) => {
     for (let i = 0; i < rows; i++) {
         let rowArray = [];
         for (let j = 0; j < columns; j++) {
-            let newSquare = { ...square, row: i, column: j }; // Cria uma cópia do objeto square e atualiza row e column
+            let newSquare = { ...square, row: i, column: j };
             rowArray.push(newSquare);
         }
         minefield.push(rowArray);
