@@ -71,11 +71,30 @@ const contarTotMinas = (campo) => {
     }
     return tot;
 }
+const imprimirMatriz = (campo) => {
+    let linhas = campo.length;
+    let colunas = campo[0].length;
 
-let teste = criarCampo(5, 5)
-colocarMinas(teste, 10)
-let qtd = contarMinasVolta(teste, 2, 2)
-console.log(qtd)
-let total = contarTotMinas(teste)
-console.log(total)
+    for (let i = 0; i < linhas; i++) {
+        let linhaString = "";
+        for (let j = 0; j < colunas; j++) {
+            let square = campo[i][j];
+            if (square.hasMine) {
+                linhaString += "[*]";
+            } else {
+                if (square.nearMines === 0) {
+                    linhaString += "[ ]";
+                } else {
+                    linhaString += `[${square.nearMines}]`;
+                }
+            }
+        }
+        console.log(linhaString);
+    }
+};
+
+// Exemplo de uso
+let teste = criarCampo(5, 5);
+colocarMinas(teste, 5);
+imprimirMatriz(teste);
 
