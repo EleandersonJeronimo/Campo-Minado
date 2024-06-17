@@ -19,7 +19,7 @@ const criarCampo = (linhas, colunas) => {
     return campo;
 };
 
-const colocarMinas = (campo, qtdMinas) => {
+const sortearMinas = (campo, qtdMinas) => {
     let linhas = campo.length;
     let colunas = campo[0].length;
     let minasColocadas = 0;
@@ -60,7 +60,7 @@ const contarMinasVolta = (campo, linha, coluna) => {
 
 const contarTotMinas = (campo) => {
     let linha = campo.length;
-    let coluna = campo.length[0];
+    let coluna = campo[0].length;
     let tot = 0;
 
     for(let i = 0; i < linha; i++){
@@ -91,8 +91,12 @@ const imprimirMatriz = (campo) => {
     }
 };
 
-// Exemplo de uso
-let teste = criarCampo(5, 5);
-colocarMinas(teste, 5);
-imprimirMatriz(teste);
+const campoMinado = criarCampo(10, 10);
+const gabaritoCampoMinado = structuredClone(campoMinado);
+sortearMinas(gabaritoCampoMinado, 10);
+contarMinasVolta(gabaritoCampoMinado, 3, 2);
+
+console.log(campoMinado)
+console.log(gabaritoCampoMinado)
+
 
