@@ -32,8 +32,6 @@ const colocarMinas = (campo, qtdMinas) => {
             campo[linha][coluna].hasMine = true;
             minasColocadas++;
         }
-        else{
-        }
     }
 };
 
@@ -93,6 +91,7 @@ const imprimirMatriz = (campo) => {
     }
 };
 
+// Exemplo de uso
 let teste = criarCampo(5, 5);
 colocarMinas(teste, 5);
 imprimirMatriz(teste);
